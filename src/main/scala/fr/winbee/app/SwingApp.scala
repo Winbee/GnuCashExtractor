@@ -5,7 +5,7 @@ import fr.winbee.controller.MainController
 import scala.swing._
 import scala.swing.event.ButtonClicked
 
-object SwingApp extends SwingApplication {
+object SwingApp extends SwingApplication with DependencyInjectionBuilder {
 
   def top = new MainFrame {
     peer.setLocationRelativeTo(null)

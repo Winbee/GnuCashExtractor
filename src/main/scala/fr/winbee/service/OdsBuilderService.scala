@@ -6,7 +6,7 @@ import fr.winbee.domain.Record
 import org.jopendocument.dom.OOUtils
 import org.jopendocument.dom.spreadsheet.SpreadSheet
 
-object OdsBuilderService {
+class OdsBuilderService {
 
   def create(recordList: List[Record], templateFile : File,outputFile: File): Unit = {
     // Load the file.

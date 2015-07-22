@@ -7,7 +7,7 @@ import fr.winbee.service.ConfigService
 import fr.winbee.utils.DateUtils
 import org.clapper.argot.{ArgotConverters, ArgotParser, ArgotUsageException}
 
-object ConsoleApp {
+object ConsoleApp extends DependencyInjectionBuilder{
 
   import ArgotConverters._
 
@@ -93,7 +93,7 @@ object ConsoleApp {
       file
   }
 
-  def launchExport = {
+  def launchExport () = {
     var startingD: Int = 0
     var endingD: Int = 0
     if (nbMonths.value.isDefined) {
@@ -104,13 +104,13 @@ object ConsoleApp {
       if (startingDate.value.isDefined) {
         startingD = startingDate.value.get
       } else {
-        startingD = ConfigService.getStartingDate
+        startingD = configService.getStartingDate
       }
 
       if (endingDate.value.isDefined) {
         endingD = endingDate.value.get
       } else {
-        endingD = ConfigService.getEndingDate
+        endingD = configService.getEndingDate
       }
     }
     
@@ -118,26 +118,26 @@ object ConsoleApp {
     if(template.value.isDefined){
       templateFile = template.value.get
     }else{
-      templateFile = ConfigService.getTemplateFile
+      templateFile = configService.getTemplateFile
     }
 
     var inputDatabaseFile : File = null
     if(inputDatabase.value.isDefined){
       inputDatabaseFile = inputDatabase.value.get
     }else{
-      inputDatabaseFile = ConfigService.getDatabaseFile
+      inputDatabaseFile = configService.getDatabaseFile
     }
 
     val outputFile : File = output.value.get
 
-    MainController.exportData(startingD,endingD,templateFile,inputDatabaseFile,outputFile)
+    mainController.exportData(startingD,endingD,templateFile,inputDatabaseFile,outputFile)
   }
 
   // Main program
   def main(args: Array[String]) {
     try {
       parser.parse(args)
-      launchExport
+      launchExport()
     }
     catch {
       case e: ArgotUsageException => println(e.message)

@@ -8,7 +8,7 @@ import fr.winbee.domain.Record
 import org.apache.commons.io.IOUtils
 
 
-object RecordRepository {
+class RecordRepository {
   def readRecord(inputDatabaseFile: File, startingDate: Int = 19000101, endingDate: Int = 30000101): List[Record] = {
     var recordList: List[Record] = List()
 
@@ -49,12 +49,12 @@ object RecordRepository {
       case e: SQLException =>
         // if the error message is "out of memory",
         // it probably means no database file is found
-        System.err.println(e.getMessage());
+        System.err.println(e.getMessage())
     }
     finally {
       try {
         if (connection != null)
-          connection.close();
+          connection.close()
       }
       catch {
         case e: SQLException =>
@@ -105,12 +105,12 @@ object RecordRepository {
       case e: SQLException =>
         // if the error message is "out of memory",
         // it probably means no database file is found
-        System.err.println(e.getMessage());
+        System.err.println(e.getMessage())
     }
     finally {
       try {
         if (connection != null)
-          connection.close();
+          connection.close()
       }
       catch {
         case e: SQLException =>

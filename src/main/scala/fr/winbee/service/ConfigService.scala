@@ -1,10 +1,10 @@
 package fr.winbee.service
 
-import java.io.{FileInputStream, File}
+import java.io.{File, FileInputStream}
 import java.util.Properties
 
 
-object ConfigService {
+class ConfigService {
 
   def getDatabaseFile: File = {
     val properties: Properties = loadPropertiesFile()
@@ -31,14 +31,14 @@ object ConfigService {
     properties.getProperty("endingDate").toInt
   }
 
-  private def loadPropertiesFile(): Properties ={
+  private def loadPropertiesFile(): Properties = {
     val mainProperties = new Properties()
 
     val configFile = new FileInputStream("./config.properties")
 
     mainProperties.load(configFile)
 
-    return mainProperties
+    mainProperties
   }
 
 }
